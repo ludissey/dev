@@ -1,3 +1,4 @@
+
 /*
 ID: unityjo1
 TASK: milk2
@@ -6,6 +7,8 @@ LANG: C++
 
 #include <algorithm>
 #include <fstream>
+#include <vector>
+
 
 using namespace std;
 
@@ -30,7 +33,7 @@ int main() {
         }
     }
     for(int i=0; i<CT.size(); i++){
-        l = max(l, CT.second - CT.first);
+        l = max(l, CT[i].second - CT[i].first);
     }
     fout << l << " " << p << endl;
     return 0;
