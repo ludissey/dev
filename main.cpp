@@ -4,7 +4,8 @@ TASK: milk2
 LANG: C++                 
 */
 
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -20,13 +21,15 @@ int main() {
     for(int i=0; i<N; i++){
         int s, e;
         fin >> s >> e;
-        if(CT.size == 0) CT[0].first==s; CT[0].second==e;
+        if(CT.size() == 0){
+            CT.push_back(make_pair(s, e));
+        }    
         else{
-            if(CT[CT.size-1].second >= e+1 && CT[CT.size-1].first >= s) CT[CT.size-1].second = e;
-            else CT.pop(make_pair(s, e)); p = s - CT[CT.size-1].second;
+            if(CT[CT.size()-1].second >= s+1 && CT[CT.size()-1].first >= s) CT[CT.size()-1].second = e;
+            else CT.push_back(make_pair(s, e)); p = s - CT[CT.size()-2].second;
         }
     }
-    for(int i=0; i<CT.size; i++){
+    for(int i=0; i<CT.size(); i++){
         l = max(l, CT.second - CT.first);
     }
     fout << l << " " << p << endl;
