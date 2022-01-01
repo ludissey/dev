@@ -28,7 +28,7 @@ int main() {
             CT.push_back(make_pair(s, e));
         }    
         else{
-            if(CT[CT.size()-1].second >= s+1 && CT[CT.size()-1].first >= s) CT[CT.size()-1].second = e;
+            if(CT[CT.size()-1].second >= s-1 && CT[CT.size()-1].first >= s) CT[CT.size()-1].second = e;
             else CT.push_back(make_pair(s, e)); p = s - CT[CT.size()-2].second;
         }
     }
