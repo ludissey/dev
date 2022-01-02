@@ -7,7 +7,8 @@ LANG: C++
 #include <algorithm>
 #include <fstream>
 #include <vector>
-
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -20,17 +21,12 @@ int main() {
     fin >> N;
 
     //array de toute les temps possible
-    for(int i=0; i<N; i++){
+    for(int i=0; i<=N; i++){
         int s, e;
         fin >> s >> e;
-        if(CT.size() == 0){
-            CT.push_back(make_pair(s, e));
-        }    
-        else{
-            if(CT[CT.size()-1].second >= s-1 && CT[CT.size()-1].first >= s) CT[CT.size()-1].second = e;
-            else CT.push_back(make_pair(s, e)); p = s - CT[CT.size()-2].second;
-        }
+        CT.push_back(make_pair(s, e));
     }
+
     sort(CT.begin(), CT.end());
     int head, _head;
     int tail, _tail;
@@ -38,16 +34,16 @@ int main() {
     tail = _tail = CT[0].second;
 
     for(int j=1; j<CT.size(); j++){
-        if(tail >= CT[j].first && tail <= CT[j].second){
-            tail = _tail = CT[j].second;
-        }
-        else{
-            l = max(l, CT[j].first-tail); 
-            head = _head = CT[j].first; 
-            tail = _tail = CT[j].second;
-        }
+        //temps le plus long 
+        if(CT[j].first <= tail && CT[j].second > tail) tail = CT[j].second; 
+        else head = CT[j].first; tail = CT[j].second;
         l = max(l, tail-head);
+
+        //temps le plus long de pause
+        if(CT[j].first >= _tail) p = max(p, CT[j].first - _tail); _head = CT[j].first;
+        _tail = CT[j].second;
     }
+
     fout << l << " " << p << endl;
     return 0;
 }
