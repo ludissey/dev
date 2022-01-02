@@ -32,8 +32,23 @@ int main() {
             else CT.push_back(make_pair(s, e)); p = s - CT[CT.size()-2].second;
         }
     }
-    for(int i=0; i<CT.size(); i++){
-        l = max(l, CT[i].second - CT[i].first);
+    sort(CT.begin(), CT.end())
+    int head, _head;
+    int tail, _tail;
+    head = _head = CT[i].first;
+    tail = _tail = CT[i].second;
+
+    for(int j=0; j<CT.size(); j++){
+        if(i==j) continue;
+        if(tail >= CT[j].first && tail <= CT[j].second){
+            tail = _tail = CT[j].second;
+        }
+        else{
+            l = max(l, CT[j].first-tail); 
+            head = _head = CT[j].first; 
+            tail = _tail = CT[j].second;
+        }
+        l = max(l, tail-head);
     }
     fout << l << " " << p << endl;
     return 0;
