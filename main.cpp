@@ -1,4 +1,3 @@
-
 /*
 ID: unityjo1
 TASK: milk2
@@ -32,14 +31,13 @@ int main() {
             else CT.push_back(make_pair(s, e)); p = s - CT[CT.size()-2].second;
         }
     }
-    sort(CT.begin(), CT.end())
+    sort(CT.begin(), CT.end());
     int head, _head;
     int tail, _tail;
-    head = _head = CT[i].first;
-    tail = _tail = CT[i].second;
+    head = _head = CT[0].first;
+    tail = _tail = CT[0].second;
 
-    for(int j=0; j<CT.size(); j++){
-        if(i==j) continue;
+    for(int j=1; j<CT.size(); j++){
         if(tail >= CT[j].first && tail <= CT[j].second){
             tail = _tail = CT[j].second;
         }
