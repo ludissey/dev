@@ -28,18 +28,20 @@ int main() {
             fin >> trans[x, y];
         }    
     }
-    if(grid[1][1] != trans[1][1]){
-
-        ÂÂ
+    bool[7] transformations = {true, true, true, true, true, true, true};
+    if(grid[1][1] != trans[1][1]){ fout << 7 << endl; }
+    else{
+        for(int x=0; x<N; x++){
+            for(int y=0; y<N; y++){ 
+                if(rotate(x,y, grid) != grid(x, y)) {transformations[0] = false}
+                if(rotate(x,y, grid) != grid(x, y)){ fout << 1 << endl}
+            }
+        }
     }
-    fout << a+b << endl;
     return 0;
 }
-void rotate90(char[N][N] grid){
-    char[N][N] copy = transpose(grid);
-    for(int x=0; x<N; x++){ for(int y=0; y<N; y++){ copy[x][y] = grid[abs(x-(N-1))][y]; }
-    return copy;
-}
+int rotate(int x, int y, char[N][N] grid){ return transpose(grid)[abs(x-(N-1))][y]; }
+
 void transpose(char[N][N] grid){
     char[N][N] copy;
     for(int x=0; x<N; x++){for(int y=0; y<N; y++){ copy[x][y] = grid[y][x]; }}
