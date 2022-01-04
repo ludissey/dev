@@ -7,14 +7,26 @@ LANG: C++
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
+
+int N;
+
+vector<vector<char>> transpose(vector<vector<char>> grid){
+    vector<vector<char>> copy = grid;
+    for(int i=0; i<N; i++){
+        for(int j=0; j<N; j++){
+            copy[i][j] = grid[j][i];
+        }
+    }
+    return copy;
+} 
 
 int main() {
     vector<vector<char>> grid;
     ofstream fout ("transform.out");
     ifstream fin ("transform.in");
-    int N;
     fin >> N;
     for(int i=0; i<N; i++){
         vector<char> rows;
@@ -23,16 +35,16 @@ int main() {
             fin >> in;
             rows.push_back(in);
         }
-        grid.push_back(row);
+        grid.push_back(rows);
     }
-    fout << a+b << endl;
-    return 0;
-}
-void transpose(vector<vector<char>> grid){
+
+    vector<vector<char>> transposed = transpose(grid);
     for(int i=0; i<N; i++){
         for(int j=0; j<N; j++){
-            grid[i][j] = grid[j][i];
+            cout << transposed[i][j];
         }
+        cout << endl;
     }
-    return grid;
-} 
+    return 0;
+}
+
