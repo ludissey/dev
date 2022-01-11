@@ -1,40 +1,31 @@
 /*
 ID: unityjo1
-TASK: palsquare
+TASK: barn1
 LANG: C++                 
 */
 
-#include <iostream>
-#include <fstream>
-#include <vector>
+ #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-void reverse(string& str)
-{
-    int n = str.length(); 
-    for (int i = 0; i < n / 2; i++) swap(str[i], str[n - i - 1]);
-}
-bool isPalindrome(int a){
-    
-    string pal = to_string(a);
-    reverse(pal);
-    if(pal == to_string(a)) return true;
-    return false;
-}
- 
-int B;
-
 int main() {
-    ofstream fout ("palsquare.out");
-    ifstream fin ("palsquare.in");
-    
-    fin >> B;
-    
-    for(int i=1; i<=300; i++){
-        if(int(reverse(to_string(i))[0])==B){}
-        if(isPalindrome(i*i)){ fout << i << " " << i*i << "\n";}
-    } 
+    ofstream fout("barn1");
+    ifstream fin("barn1");
+    int M, S, C;
+
+    bool init=true;
+    int out, prev_stall, boards_used;
+    out=prev_stall=boards_used=0;
+    for(int i=0; i<C; i++){
+        int stall;
+        cin >> stall;
+        if(stall-prev_stall<C/3&&!init&&boards_used+1<=M){init=true;}
+        prev_stall=stall;
+        if(init){out=stall;}
+        else{out=stall - out;}
+    }
+    fout << out << endl;
     return 0;
 }
